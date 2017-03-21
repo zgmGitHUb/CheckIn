@@ -24,11 +24,13 @@
         <processorPath useClasspath="true" />
         <module name="ChenkIn" />
         <module name="GUIDE" />
+        <module name="SignIn" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ChenkIn" target="1.5" />
       <module name="GUIDE" target="1.5" />
+      <module name="SignIn" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -23,6 +23,11 @@ public class DepartmentAdminService {
         TbEmployeeExample.Criteria criteria=employeeExample.createCriteria();
         criteria.andDepartmentidEqualTo(tbEmployee.getDepartmentid());
         List<TbEmployee> employeeList=tbEmployeeMapper.selectByExample(employeeExample);
+        for(TbEmployee tmp:employeeList)
+        {
+            //System.out.println(tmp);
+            tmp.setPassword(null);
+        }
         return employeeList;
     }
 }

@@ -304,6 +304,76 @@ public class TbNotifyExample {
             addCriterion("NotifyTime not between", value1, value2, "notifytime");
             return (Criteria) this;
         }
+
+        public Criteria andAdscriptionIsNull() {
+            addCriterion("Adscription is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionIsNotNull() {
+            addCriterion("Adscription is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionEqualTo(String value) {
+            addCriterion("Adscription =", value, "adscription");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionNotEqualTo(String value) {
+            addCriterion("Adscription <>", value, "adscription");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionGreaterThan(String value) {
+            addCriterion("Adscription >", value, "adscription");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionGreaterThanOrEqualTo(String value) {
+            addCriterion("Adscription >=", value, "adscription");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionLessThan(String value) {
+            addCriterion("Adscription <", value, "adscription");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionLessThanOrEqualTo(String value) {
+            addCriterion("Adscription <=", value, "adscription");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionLike(String value) {
+            addCriterion("Adscription like", value, "adscription");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionNotLike(String value) {
+            addCriterion("Adscription not like", value, "adscription");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionIn(List<String> values) {
+            addCriterion("Adscription in", values, "adscription");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionNotIn(List<String> values) {
+            addCriterion("Adscription not in", values, "adscription");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionBetween(String value1, String value2) {
+            addCriterion("Adscription between", value1, value2, "adscription");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdscriptionNotBetween(String value1, String value2) {
+            addCriterion("Adscription not between", value1, value2, "adscription");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

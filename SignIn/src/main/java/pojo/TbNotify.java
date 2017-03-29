@@ -9,6 +9,8 @@ public class TbNotify {
 
     private Date notifytime;
 
+    private String adscription;
+
     public String getNotifyid() {
         return notifyid;
     }
@@ -31,5 +33,13 @@ public class TbNotify {
 
     public void setNotifytime(Date notifytime) {
         this.notifytime = notifytime;
+    }
+
+    public String getAdscription() {
+        return adscription;
+    }
+
+    public void setAdscription(String adscription) {
+        this.adscription = adscription == null ? null : adscription.trim();
     }
 }

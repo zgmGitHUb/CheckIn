@@ -39,4 +39,12 @@ public class DepartmentAdminServiceTest {
         tbEmployee.setDepartmentid("1");
         List<TbApplication> applications=departmentAdminService.queryApplication(tbEmployee);
     }
+
+    @Test
+    public void testQueryHistoryApplication() throws Exception {
+        DepartmentAdminService departmentAdminService= (DepartmentAdminService) applicationContext.getBean("departmentAdminService");
+        TbEmployee tbEmployee=new TbEmployee();
+        tbEmployee.setDepartmentid("1");
+        List<TbApplication> applications=departmentAdminService.queryHistoryApplication(tbEmployee);
+    }
 }

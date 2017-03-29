@@ -50,12 +50,13 @@
               <table schema="" tableName="tb_department"/>
               <table schema="" tableName="tb_employee"/>
               <table schema="" tableName="tb_detail"/>
-              <table schema="" tableName="tb_schedule"/>
+              <table schema="" tableName="tb_employeeschedule"/>
               <table schema="" tableName="tb_memo"/>
               <table schema="" tableName="tb_notify"/>
               <table schema="" tableName="tb_employeeNotify"/>
               <table schema="" tableName="tb_dailyAttendance"/>
               <table schema="" tableName="tb_advice"/>
+              <table schema="" tableName="tb_departmentSchedule"/>
 
 
 

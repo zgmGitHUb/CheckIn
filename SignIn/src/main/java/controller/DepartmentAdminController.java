@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.TbApplication;
+import pojo.TbDepartmentschedule;
 import pojo.TbEmployee;
 import service.departmentAdminService.DepartmentAdminService;
 
@@ -39,5 +40,24 @@ public class DepartmentAdminController {
             return null;
         List<TbApplication> applications=departmentAdminService.queryApplication(tbEmployee);
         return applications;
+    }
+    @RequestMapping("/queryHistoryApplications")
+    public @ResponseBody List<TbApplication> queryHistoryApplications(TbEmployee tbEmployee)
+    {
+        String departmentId=tbEmployee.getDepartmentid();
+        if(departmentId==null||departmentId=="")
+            return null;
+        List<TbApplication> applications=departmentAdminService.queryHistoryApplication(tbEmployee);
+        return applications;
+    }
+
+    @RequestMapping("/queryDepartmentSchedules")
+    public @ResponseBody List<TbDepartmentschedule> queryDepartmentSchedules(TbEmployee tbEmployee)
+    {
+        String departmentId=tbEmployee.getDepartmentid();
+        if(departmentId==null||departmentId=="")
+            return null;
+        List<TbDepartmentschedule> departmentschedules=departmentAdminService.queryDepartmentSchedule(tbEmployee);
+        return departmentschedules;
     }
 }

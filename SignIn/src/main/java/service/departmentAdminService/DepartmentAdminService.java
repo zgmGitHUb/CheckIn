@@ -1,13 +1,11 @@
 package service.departmentAdminService;
 
 import mapper.TbApplicationMapper;
+import mapper.TbDepartmentscheduleMapper;
 import mapper.TbEmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pojo.TbApplication;
-import pojo.TbApplicationExample;
-import pojo.TbEmployee;
-import pojo.TbEmployeeExample;
+import pojo.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +23,9 @@ public class DepartmentAdminService {
 
     @Autowired
     private TbApplicationMapper tbApplicationMapper;
+
+    @Autowired
+    private TbDepartmentscheduleMapper tbDepartmentscheduleMapper;
 
     public List<TbEmployee>  queryEmployee(TbEmployee tbEmployee)
     {
@@ -75,8 +76,17 @@ public class DepartmentAdminService {
         now.set(Calendar.DATE,now.get(Calendar.DATE)-7);
         Date d2=now.getTime();
 
-        criteria.andApplicationtimeBetween(d2,d1);
+        criteria.andApplicationtimeBetween(d2, d1);
         List<TbApplication> applications=tbApplicationMapper.selectByExample(applicationExample);
         return applications;
+    }
+
+    public List<TbDepartmentschedule> queryDepartmentSchedule(TbEmployee tbEmployee)
+    {
+        TbDepartmentscheduleExample tbDepartmentscheduleExample=new TbDepartmentscheduleExample();
+        TbDepartmentscheduleExample.Criteria criteria=tbDepartmentscheduleExample.createCriteria();
+        criteria.andDepartmentidEqualTo(tbEmployee.getDepartmentid());
+        List<TbDepartmentschedule> departmentschedules=tbDepartmentscheduleMapper.selectByExample(tbDepartmentscheduleExample);
+        return departmentschedules;
     }
 }

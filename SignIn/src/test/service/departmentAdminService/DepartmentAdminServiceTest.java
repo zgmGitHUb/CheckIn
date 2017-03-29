@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pojo.TbApplication;
+import pojo.TbDepartmentschedule;
 import pojo.TbEmployee;
 
 import java.util.List;
@@ -46,5 +47,13 @@ public class DepartmentAdminServiceTest {
         TbEmployee tbEmployee=new TbEmployee();
         tbEmployee.setDepartmentid("1");
         List<TbApplication> applications=departmentAdminService.queryHistoryApplication(tbEmployee);
+    }
+
+    @Test
+    public void testQueryDepartmentSchedule() throws Exception {
+        DepartmentAdminService departmentAdminService= (DepartmentAdminService) applicationContext.getBean("departmentAdminService");
+        TbEmployee tbEmployee=new TbEmployee();
+        tbEmployee.setDepartmentid("1");
+        List<TbDepartmentschedule> departmentschedules=departmentAdminService.queryDepartmentSchedule(tbEmployee);
     }
 }

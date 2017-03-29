@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import pojo.TbApplication;
 import pojo.TbEmployee;
 
 import java.util.List;
@@ -29,5 +30,13 @@ public class DepartmentAdminServiceTest {
         tbEmployee.setDepartmentid("1");
         List<TbEmployee> employeeList=departmentAdminService.queryEmployee(tbEmployee);
 
+    }
+
+    @Test
+    public void testQueryApplication() throws Exception {
+        DepartmentAdminService departmentAdminService= (DepartmentAdminService) applicationContext.getBean("departmentAdminService");
+        TbEmployee tbEmployee=new TbEmployee();
+        tbEmployee.setDepartmentid("1");
+        List<TbApplication> applications=departmentAdminService.queryApplication(tbEmployee);
     }
 }

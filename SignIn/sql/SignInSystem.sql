@@ -8,7 +8,8 @@ create table tb_companyRepresentative /*公司负责人表*/
 	Name varchar(20) not null,#公司负责人名称
 	Password varchar(20) not null,#密码
 	Telephone char(12) not null,#手机号码
-	Email varchar(32) not null #邮箱
+	Email varchar(32) not null
+	#邮箱
 
 );
 describe tb_companyRepresentative;
@@ -93,17 +94,29 @@ create table tb_dailyAttendance /*日常出勤表*/
 describe tb_dailyAttendance;
 
 use SignInSystem; /*打开数据库*/
-create table tb_schedule /*员工上班时间表*/
+create table tb_departmentSchedule /*员工上班时间表*/
 (
 	ScheduleId char(32) primary key,#上班时间表记录id
-	EmployeeId char(32) not null,#员工id
-	foreign key(EmployeeId) references tb_employee(EmployeeId),#外键
+	DepartmentId char(32) not null,#部门id
+	foreign key(DepartmentId) references tb_department(DepartmentId),#外键
 	EnterTime timestamp not null,#上班时间
 	OutTime timestamp not null
 	#下班时间
 
 );
-describe tb_schedule;
+describe tb_departmentSchedule;
+
+use SignInSystem; /*打开数据库*/
+create table tb_employeeSchedule /*员工上班时间表*/
+(
+	ScheduleId char(32) not null,#上班时间表记录id
+	EmployeeId char(32) not null,#员工id
+	foreign key(EmployeeId) references tb_employee(EmployeeId),#外键
+	foreign key(ScheduleId) references tb_departmentSchedule(ScheduleId),#外键
+	primary key(ScheduleId,EmployeeId)
+
+);
+describe tb_employeeSchedule;
 
 use SignInSystem; /*打开数据库*/
 create table tb_memo /*备忘录表*/
@@ -200,8 +213,9 @@ create table tb_notify /*通知表*/
 (
 	NotifyId char(32) primary key,#通知记录id
 	Content varchar(100) not null,#通知内容
-	NotifyTime timestamp not null
-	#发布通知时间
+	NotifyTime timestamp not null,#发布通知时间
+	Adscription varchar(60) not null
+	#所属部门/公司
 
 );
 describe tb_notify;
@@ -212,6 +226,7 @@ create table tb_employeeNotify /*员工的通知表*/
 
 	NotifyId char(32) not null,#通知记录id
 	EmployeeId char(32) not null,#员工id
+	Status bit default 0  not null,#审阅状态 1-已读 0-未读
 	foreign key(EmployeeId) references tb_employee(EmployeeId),#外键
 	foreign key(NotifyId) references tb_notify(NotifyId),#外键
 	primary key(NotifyId,EmployeeId)

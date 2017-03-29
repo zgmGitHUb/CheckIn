@@ -5,6 +5,7 @@
     <id column="NotifyId" jdbcType="CHAR" property="notifyid" />
     <result column="Content" jdbcType="VARCHAR" property="content" />
     <result column="NotifyTime" jdbcType="TIMESTAMP" property="notifytime" />
+    <result column="Adscription" jdbcType="VARCHAR" property="adscription" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    NotifyId, Content, NotifyTime
+    NotifyId, Content, NotifyTime, Adscription
   </sql>
   <select id="selectByExample" parameterType="pojo.TbNotifyExample" resultMap="BaseResultMap">
     select
@@ -98,10 +99,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="pojo.TbNotify">
-    insert into tb_notify (NotifyId, Content, NotifyTime
-      )
-    values (#{notifyid,jdbcType=CHAR}, #{content,jdbcType=VARCHAR}, #{notifytime,jdbcType=TIMESTAMP}
-      )
+    insert into tb_notify (NotifyId, Content, NotifyTime, 
+      Adscription)
+    values (#{notifyid,jdbcType=CHAR}, #{content,jdbcType=VARCHAR}, #{notifytime,jdbcType=TIMESTAMP}, 
+      #{adscription,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="pojo.TbNotify">
     insert into tb_notify
@@ -115,6 +116,9 @@
       <if test="notifytime != null">
         NotifyTime,
       </if>
+      <if test="adscription != null">
+        Adscription,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="notifyid != null">
@@ -125,6 +129,9 @@
       </if>
       <if test="notifytime != null">
         #{notifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adscription != null">
+        #{adscription,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -146,6 +153,9 @@
       <if test="record.notifytime != null">
         NotifyTime = #{record.notifytime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.adscription != null">
+        Adscription = #{record.adscription,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +165,8 @@
     update tb_notify
     set NotifyId = #{record.notifyid,jdbcType=CHAR},
       Content = #{record.content,jdbcType=VARCHAR},
-      NotifyTime = #{record.notifytime,jdbcType=TIMESTAMP}
+      NotifyTime = #{record.notifytime,jdbcType=TIMESTAMP},
+      Adscription = #{record.adscription,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +180,17 @@
       <if test="notifytime != null">
         NotifyTime = #{notifytime,jdbcType=TIMESTAMP},
       </if>
+      <if test="adscription != null">
+        Adscription = #{adscription,jdbcType=VARCHAR},
+      </if>
     </set>
     where NotifyId = #{notifyid,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="pojo.TbNotify">
     update tb_notify
     set Content = #{content,jdbcType=VARCHAR},
-      NotifyTime = #{notifytime,jdbcType=TIMESTAMP}
+      NotifyTime = #{notifytime,jdbcType=TIMESTAMP},
+      Adscription = #{adscription,jdbcType=VARCHAR}
     where NotifyId = #{notifyid,jdbcType=CHAR}
   </update>
 </mapper>

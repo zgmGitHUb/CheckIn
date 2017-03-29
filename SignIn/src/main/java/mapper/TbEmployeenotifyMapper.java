@@ -2,6 +2,7 @@ package mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import pojo.TbEmployeenotify;
 import pojo.TbEmployeenotifyExample;
 import pojo.TbEmployeenotifyKey;
 
@@ -12,13 +13,19 @@ public interface TbEmployeenotifyMapper {
 
     int deleteByPrimaryKey(TbEmployeenotifyKey key);
 
-    int insert(TbEmployeenotifyKey record);
+    int insert(TbEmployeenotify record);
 
-    int insertSelective(TbEmployeenotifyKey record);
+    int insertSelective(TbEmployeenotify record);
 
-    List<TbEmployeenotifyKey> selectByExample(TbEmployeenotifyExample example);
+    List<TbEmployeenotify> selectByExample(TbEmployeenotifyExample example);
 
-    int updateByExampleSelective(@Param("record") TbEmployeenotifyKey record, @Param("example") TbEmployeenotifyExample example);
+    TbEmployeenotify selectByPrimaryKey(TbEmployeenotifyKey key);
 
-    int updateByExample(@Param("record") TbEmployeenotifyKey record, @Param("example") TbEmployeenotifyExample example);
+    int updateByExampleSelective(@Param("record") TbEmployeenotify record, @Param("example") TbEmployeenotifyExample example);
+
+    int updateByExample(@Param("record") TbEmployeenotify record, @Param("example") TbEmployeenotifyExample example);
+
+    int updateByPrimaryKeySelective(TbEmployeenotify record);
+
+    int updateByPrimaryKey(TbEmployeenotify record);
 }

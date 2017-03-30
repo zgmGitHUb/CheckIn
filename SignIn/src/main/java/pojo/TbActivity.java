@@ -17,6 +17,8 @@ public class TbActivity {
 
     private String address;
 
+    private Boolean style;
+
     public String getActivityid() {
         return activityid;
     }
@@ -71,5 +73,13 @@ public class TbActivity {
 
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
+    }
+
+    public Boolean getStyle() {
+        return style;
+    }
+
+    public void setStyle(Boolean style) {
+        this.style = style;
     }
 }

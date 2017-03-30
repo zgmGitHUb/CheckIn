@@ -1,3 +1,4 @@
+
 create database SignInSystem;
 
 
@@ -171,8 +172,9 @@ create table tb_activity /*活动表*/
 	EndTime timestamp not null,#截止时间
 	EmployeeId char(32) not null,#发起人id
 	foreign key(EmployeeId) references tb_employee(EmployeeId),#外键
-	Address varchar(30) not null
-	#活动地点
+	Address varchar(30) not null,#活动地点
+	Style bit default 0 not null
+	#0-活动 1-会议
 
 );
 describe tb_activity;
@@ -223,7 +225,6 @@ describe tb_notify;
 use SignInSystem; /*打开数据库*/
 create table tb_employeeNotify /*员工的通知表*/
 (
-
 	NotifyId char(32) not null,#通知记录id
 	EmployeeId char(32) not null,#员工id
 	Status bit default 0  not null,#审阅状态 1-已读 0-未读
@@ -232,3 +233,14 @@ create table tb_employeeNotify /*员工的通知表*/
 	primary key(NotifyId,EmployeeId)
 );
 describe tb_employeeNotify;
+
+use SignInSystem; /*打开数据库*/
+create table tb_interim /*请假临时表*/
+(
+	EmployeeId char(32) not null,#员工id
+	DepartmentId char(32) not null,#部门id
+	foreign key(DepartmentId) references tb_department(DepartmentId),#外键
+	foreign key(EmployeeId) references tb_employee(EmployeeId),#外键
+	primary key(DepartmentId,EmployeeId)
+);
+describe tb_interim;

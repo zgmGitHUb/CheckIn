@@ -574,6 +574,66 @@ public class TbActivityExample {
             addCriterion("Address not between", value1, value2, "address");
             return (Criteria) this;
         }
+
+        public Criteria andStyleIsNull() {
+            addCriterion("Style is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStyleIsNotNull() {
+            addCriterion("Style is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStyleEqualTo(Boolean value) {
+            addCriterion("Style =", value, "style");
+            return (Criteria) this;
+        }
+
+        public Criteria andStyleNotEqualTo(Boolean value) {
+            addCriterion("Style <>", value, "style");
+            return (Criteria) this;
+        }
+
+        public Criteria andStyleGreaterThan(Boolean value) {
+            addCriterion("Style >", value, "style");
+            return (Criteria) this;
+        }
+
+        public Criteria andStyleGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("Style >=", value, "style");
+            return (Criteria) this;
+        }
+
+        public Criteria andStyleLessThan(Boolean value) {
+            addCriterion("Style <", value, "style");
+            return (Criteria) this;
+        }
+
+        public Criteria andStyleLessThanOrEqualTo(Boolean value) {
+            addCriterion("Style <=", value, "style");
+            return (Criteria) this;
+        }
+
+        public Criteria andStyleIn(List<Boolean> values) {
+            addCriterion("Style in", values, "style");
+            return (Criteria) this;
+        }
+
+        public Criteria andStyleNotIn(List<Boolean> values) {
+            addCriterion("Style not in", values, "style");
+            return (Criteria) this;
+        }
+
+        public Criteria andStyleBetween(Boolean value1, Boolean value2) {
+            addCriterion("Style between", value1, value2, "style");
+            return (Criteria) this;
+        }
+
+        public Criteria andStyleNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("Style not between", value1, value2, "style");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

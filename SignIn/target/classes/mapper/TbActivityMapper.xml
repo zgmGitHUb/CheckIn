@@ -9,6 +9,7 @@
     <result column="EndTime" jdbcType="TIMESTAMP" property="endtime" />
     <result column="EmployeeId" jdbcType="CHAR" property="employeeid" />
     <result column="Address" jdbcType="VARCHAR" property="address" />
+    <result column="Style" jdbcType="BIT" property="style" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ActivityId, ActivityName, Content, StartTime, EndTime, EmployeeId, Address
+    ActivityId, ActivityName, Content, StartTime, EndTime, EmployeeId, Address, Style
   </sql>
   <select id="selectByExample" parameterType="pojo.TbActivityExample" resultMap="BaseResultMap">
     select
@@ -104,10 +105,10 @@
   <insert id="insert" parameterType="pojo.TbActivity">
     insert into tb_activity (ActivityId, ActivityName, Content, 
       StartTime, EndTime, EmployeeId, 
-      Address)
+      Address, Style)
     values (#{activityid,jdbcType=CHAR}, #{activityname,jdbcType=CHAR}, #{content,jdbcType=VARCHAR}, 
       #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{employeeid,jdbcType=CHAR}, 
-      #{address,jdbcType=VARCHAR})
+      #{address,jdbcType=VARCHAR}, #{style,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="pojo.TbActivity">
     insert into tb_activity
@@ -133,6 +134,9 @@
       <if test="address != null">
         Address,
       </if>
+      <if test="style != null">
+        Style,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="activityid != null">
@@ -155,6 +159,9 @@
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null">
+        #{style,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.address != null">
         Address = #{record.address,jdbcType=VARCHAR},
       </if>
+      <if test="record.style != null">
+        Style = #{record.style,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       StartTime = #{record.starttime,jdbcType=TIMESTAMP},
       EndTime = #{record.endtime,jdbcType=TIMESTAMP},
       EmployeeId = #{record.employeeid,jdbcType=CHAR},
-      Address = #{record.address,jdbcType=VARCHAR}
+      Address = #{record.address,jdbcType=VARCHAR},
+      Style = #{record.style,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="address != null">
         Address = #{address,jdbcType=VARCHAR},
       </if>
+      <if test="style != null">
+        Style = #{style,jdbcType=BIT},
+      </if>
     </set>
     where ActivityId = #{activityid,jdbcType=CHAR}
   </update>
@@ -237,7 +251,8 @@
       StartTime = #{starttime,jdbcType=TIMESTAMP},
       EndTime = #{endtime,jdbcType=TIMESTAMP},
       EmployeeId = #{employeeid,jdbcType=CHAR},
-      Address = #{address,jdbcType=VARCHAR}
+      Address = #{address,jdbcType=VARCHAR},
+      Style = #{style,jdbcType=BIT}
     where ActivityId = #{activityid,jdbcType=CHAR}
   </update>
 </mapper>

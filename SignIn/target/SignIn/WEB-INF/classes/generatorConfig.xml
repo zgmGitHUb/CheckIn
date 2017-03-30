@@ -57,6 +57,7 @@
               <table schema="" tableName="tb_dailyAttendance"/>
               <table schema="" tableName="tb_advice"/>
               <table schema="" tableName="tb_departmentSchedule"/>
+              <table schema="" tableName="tb_interim"/>
 
 
 

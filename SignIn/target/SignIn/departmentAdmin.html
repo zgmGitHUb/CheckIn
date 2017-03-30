@@ -17,6 +17,7 @@
 	<script>
 		var departmentId="";
 		var privilege="";
+		var employeeId="";
 		function getCookie() {
 			var strCookie = document.cookie;
 			var arrCookie = strCookie.split(";");
@@ -31,6 +32,10 @@
 
 					privilege= arr[1];
 				}
+				if ("employeeId" == arr[0]) {
+
+					employeeId= arr[1];
+				}
 			}
 		}
 		function setCookie() {
@@ -38,12 +43,13 @@
 			now.setTime(now.getTime() + 5 * 60 * 1000);
 			document.cookie = "privilege=1;expires=" + now.toGMTString();
 			document.cookie = "departmentId=1;expires=" + now.toGMTString();
+			document.cookie = "employeeId=2;expires=" + now.toGMTString();
 		}
 
 		function judge() {
 			getCookie();
 			if (departmentId == null || privilege == null || departmentId ==""
-					|| privilege == "") {
+					|| privilege == ""||employeeId==null||employeeId=="") {
 
 				window.open("index.html", "_self");
 			} else {
@@ -51,6 +57,8 @@
 				getApplications();
 				getHistoryApplications();
 				queryDepartmentSchedules();
+				queryNotifies();
+				queryHistoryNotifies();
 			}
 		}
 
@@ -224,6 +232,96 @@
 												+ (new Date(data[i].entertime)).toLocaleString()
 												+ '</td><td>'
 												+ (new Date(data[i].outtime)).toLocaleString()
+												+ '</td></tr>');
+
+									}
+									return false;
+								}
+							});
+						},
+						error : function() {
+							return;
+						}
+					});
+		}
+
+		function queryNotifies() {
+
+			$
+					.ajax({
+						type : 'post',
+						url : "DepartmentAdmin/queryNotifies",
+						data: 'employeeid='+employeeId+'&status=false',
+						success : function(data) {
+							$(function() {
+
+								var length = data.length;
+								$("#Pagination5").pagination(length, {
+									items_per_page : 10,
+									callback : pageselectCallback
+								});
+
+								function pageselectCallback(page_index, jq) {
+									var items_per_page = 10;
+									var max_elem = Math.min((page_index + 1)
+											* items_per_page, length);
+
+									$("#notifies").html("");//html() 方法返回或设置被选元素的内容 (inner HTML)。
+									for (var i = page_index * items_per_page; i < max_elem; i++) {
+										var s=i+1;
+										$("#notifies")
+												.append(
+												'<tr><td><input type="checkbox" id="my_prepare_notify_checkbox_'+s+'"/></td><td>'
+												+ data[i].notifyid
+												+ '</td><td>'
+												+ data[i].content
+												+ '</td><td>'
+												+ (new Date(data[i].notifytime)).toLocaleString()
+												+ '</td></tr>');
+
+									}
+									return false;
+								}
+							});
+						},
+						error : function() {
+							return;
+						}
+					});
+		}
+
+		function queryHistoryNotifies() {
+
+			$
+					.ajax({
+						type : 'post',
+						url : "DepartmentAdmin/queryNotifies",
+						data: 'employeeid='+employeeId+'&status=true',
+						success : function(data) {
+							$(function() {
+
+								var length = data.length;
+								$("#Pagination6").pagination(length, {
+									items_per_page : 10,
+									callback : pageselectCallback
+								});
+
+								function pageselectCallback(page_index, jq) {
+									var items_per_page = 10;
+									var max_elem = Math.min((page_index + 1)
+											* items_per_page, length);
+
+									$("#historyNotifies").html("");//html() 方法返回或设置被选元素的内容 (inner HTML)。
+									for (var i = page_index * items_per_page; i < max_elem; i++) {
+										var s=i+1;
+										$("#historyNotifies")
+												.append(
+												'<tr><td><input type="checkbox" id="my_history_notify_checkbox_'+s+'"/></td><td>'
+												+ data[i].notifyid
+												+ '</td><td>'
+												+ data[i].content
+												+ '</td><td>'
+												+ (new Date(data[i].notifytime)).toLocaleString()
 												+ '</td></tr>');
 
 									}
@@ -647,16 +745,12 @@
 							<!--调用全选js函数-->
 							<th><input type="checkbox" id="my_prepare_notify_checkbox_selectall" onclick="prepare_notify_select_all()"/></th>
 							<th>通知编号</th>
-							<th>通知发起人</th>
-							<th>通知时间</th>
-							<th>通知地点</th>
 							<th>通知内容</th>
-							<th>联系电话</th>
-							<th>邮箱号码</th>
+							<th>通知时间</th>
 						</tr>
 						</thead>
 
-						<tbody>
+						<tbody id="notifies">
 						<tr>
 							<td><input type="checkbox" id="my_prepare_notify_checkbox_1"/></td>
 							<td>123456789</td>
@@ -740,35 +834,8 @@
 						</tbody>
 					</table>
 					<!--分页-->
-					<nav aria-label="Page navigation" class="text-center">
-						<ul class="pagination">
-							<li>
-								<a href="#" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">1</a>
-							</li>
-							<li>
-								<a href="#">2</a>
-							</li>
-							<li>
-								<a href="#">3</a>
-							</li>
-							<li>
-								<a href="#">4</a>
-							</li>
-							<li>
-								<a href="#">5</a>
-							</li>
-							<li>
-								<a href="#" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
+					<div id="Pagination5" class="pagination">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -819,16 +886,12 @@
 							<!--调用全选js函数-->
 							<th><input type="checkbox" id="my_history_notify_checkbox_selectall" onclick="history_notify_select_all()"/></th>
 							<th>通知编号</th>
-							<th>通知发起人</th>
-							<th>通知时间</th>
-							<th>通知地点</th>
 							<th>通知内容</th>
-							<th>联系电话</th>
-							<th>邮箱号码</th>
+							<th>通知时间</th>
 						</tr>
 						</thead>
 
-						<tbody>
+						<tbody id="historyNotifies">
 						<tr>
 							<td><input type="checkbox" id="my_history_notify_checkbox_1"/></td>
 							<td>123456789</td>
@@ -912,35 +975,8 @@
 						</tbody>
 					</table>
 					<!--分页-->
-					<nav aria-label="Page navigation" class="text-center">
-						<ul class="pagination">
-							<li>
-								<a href="#" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">1</a>
-							</li>
-							<li>
-								<a href="#">2</a>
-							</li>
-							<li>
-								<a href="#">3</a>
-							</li>
-							<li>
-								<a href="#">4</a>
-							</li>
-							<li>
-								<a href="#">5</a>
-							</li>
-							<li>
-								<a href="#" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
+					<div id="Pagination6" class="pagination">
+					</div>
 				</div>
 			</div>
 		</div>

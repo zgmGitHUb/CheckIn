@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.TbApplication;
 import pojo.TbDepartmentschedule;
 import pojo.TbEmployee;
+import pojo.TbNotify;
 import service.departmentAdminService.DepartmentAdminService;
 
 import java.util.List;
@@ -60,4 +61,15 @@ public class DepartmentAdminController {
         List<TbDepartmentschedule> departmentschedules=departmentAdminService.queryDepartmentSchedule(tbEmployee);
         return departmentschedules;
     }
+
+    @RequestMapping("/queryNotifies")
+    public @ResponseBody List<TbNotify> queryNotifies(TbEmployee tbEmployee,boolean status)
+    {
+        String employId=tbEmployee.getEmployeeid();
+        if(employId==null||employId=="")
+            return null;
+        List<TbNotify> notifies=departmentAdminService.queryNotify(tbEmployee,status);
+        return notifies;
+    }
+
 }

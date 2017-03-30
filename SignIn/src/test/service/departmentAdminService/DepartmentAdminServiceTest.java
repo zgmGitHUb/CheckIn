@@ -56,4 +56,20 @@ public class DepartmentAdminServiceTest {
         tbEmployee.setDepartmentid("1");
         List<TbDepartmentschedule> departmentschedules=departmentAdminService.queryDepartmentSchedule(tbEmployee);
     }
+
+    @Test
+    public void testQueryEmployeeNotify() throws Exception {
+        DepartmentAdminService departmentAdminService= (DepartmentAdminService) applicationContext.getBean("departmentAdminService");
+        TbEmployee tbEmployee=new TbEmployee();
+        tbEmployee.setEmployeeid("2");
+        departmentAdminService.queryEmployeeNotify(tbEmployee,false);
+    }
+
+    @Test
+    public void testQueryNotify() throws Exception {
+        DepartmentAdminService departmentAdminService= (DepartmentAdminService) applicationContext.getBean("departmentAdminService");
+        TbEmployee tbEmployee=new TbEmployee();
+        tbEmployee.setEmployeeid("2");
+        departmentAdminService.queryNotify(tbEmployee,true);
+    }
 }

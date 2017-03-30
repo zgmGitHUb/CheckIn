@@ -5,8 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pojo.TbApplication;
-import pojo.TbEmployee;
+import pojo.*;
 import service.departmentAdminService.DepartmentAdminService;
 
 import java.util.List;
@@ -40,4 +39,44 @@ public class DepartmentAdminController {
         List<TbApplication> applications=departmentAdminService.queryApplication(tbEmployee);
         return applications;
     }
+    @RequestMapping("/queryHistoryApplications")
+    public @ResponseBody List<TbApplication> queryHistoryApplications(TbEmployee tbEmployee)
+    {
+        String departmentId=tbEmployee.getDepartmentid();
+        if(departmentId==null||departmentId=="")
+            return null;
+        List<TbApplication> applications=departmentAdminService.queryHistoryApplication(tbEmployee);
+        return applications;
+    }
+
+    @RequestMapping("/queryDepartmentSchedules")
+    public @ResponseBody List<TbDepartmentschedule> queryDepartmentSchedules(TbEmployee tbEmployee)
+    {
+        String departmentId=tbEmployee.getDepartmentid();
+        if(departmentId==null||departmentId=="")
+            return null;
+        List<TbDepartmentschedule> departmentschedules=departmentAdminService.queryDepartmentSchedule(tbEmployee);
+        return departmentschedules;
+    }
+
+    @RequestMapping("/queryNotifies")
+    public @ResponseBody List<TbNotify> queryNotifies(TbEmployee tbEmployee,boolean status)
+    {
+        String employId=tbEmployee.getEmployeeid();
+        if(employId==null||employId=="")
+            return null;
+        List<TbNotify> notifies=departmentAdminService.queryNotify(tbEmployee,status);
+        return notifies;
+    }
+
+    @RequestMapping("/queryActivites")
+    public @ResponseBody List<TbActivity> queryActivites(TbEmployee tbEmployee)
+    {
+        String employId=tbEmployee.getEmployeeid();
+        if(employId==null||employId=="")
+            return null;
+        List<TbActivity> activities=departmentAdminService.queryActivites(tbEmployee);
+        return activities;
+    }
+
 }

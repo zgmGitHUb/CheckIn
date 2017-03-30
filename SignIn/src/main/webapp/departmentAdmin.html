@@ -59,6 +59,7 @@
 				queryDepartmentSchedules();
 				queryNotifies();
 				queryHistoryNotifies();
+				queryActivites();
 			}
 		}
 
@@ -322,6 +323,57 @@
 												+ data[i].content
 												+ '</td><td>'
 												+ (new Date(data[i].notifytime)).toLocaleString()
+												+ '</td></tr>');
+
+									}
+									return false;
+								}
+							});
+						},
+						error : function() {
+							return;
+						}
+					});
+		}
+
+		function queryActivites() {
+
+			$
+					.ajax({
+						type : 'post',
+						url : "DepartmentAdmin/queryActivites",
+						data: 'employeeid='+employeeId,
+						success : function(data) {
+							$(function() {
+
+								var length = data.length;
+								$("#Pagination7").pagination(length, {
+									items_per_page : 10,
+									callback : pageselectCallback
+								});
+
+								function pageselectCallback(page_index, jq) {
+									var items_per_page = 10;
+									var max_elem = Math.min((page_index + 1)
+											* items_per_page, length);
+
+									$("#activities").html("");//html() 方法返回或设置被选元素的内容 (inner HTML)。
+									for (var i = page_index * items_per_page; i < max_elem; i++) {
+										var s=i+1;
+										$("#activities")
+												.append(
+												'<tr><td><input type="checkbox" id="my_business_trip_checkbox_'+s+'"/></td><td>'
+												+ data[i].activityid
+												+ '</td><td>'
+												+ data[i].activityname
+												+ '</td><td>'
+												+ data[i].content
+												+ '</td><td>'
+												+ (new Date(data[i].starttime)).toLocaleString()
+												+ '</td><td>'
+												+ (new Date(data[i].endtime)).toLocaleString()
+												+ '</td><td>'
+												+ data[i].address
 												+ '</td></tr>');
 
 									}
@@ -1256,18 +1308,16 @@
 						<tr>
 							<!--调用全选js函数-->
 							<th><input type="checkbox" id="my_business_trip_checkbox_selectall" onclick="business_trip_select_all()"/></th>
-							<th>员工号</th>
-							<th>姓名</th>
-							<th>性别</th>
-							<th>所属部门</th>
-							<th>职位</th>
-							<th>联系电话</th>
-							<th>邮箱号码</th>
-							<th>出差类型</th>
+							<th>Id</th>
+							<th>活动</th>
+							<th>内容</th>
+							<th>开始时间</th>
+							<th>结束时间</th>
+							<th>地点</th>
 						</tr>
 						</thead>
 
-						<tbody>
+						<tbody id="activities">
 						<tr>
 							<td><input type="checkbox" id="my_business_trip_checkbox_1"/></td>
 							<td>1213123</td>
@@ -1359,35 +1409,8 @@
 						</tbody>
 					</table>
 					<!--分页-->
-					<nav aria-label="Page navigation" class="text-center">
-						<ul class="pagination">
-							<li>
-								<a href="#" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">1</a>
-							</li>
-							<li>
-								<a href="#">2</a>
-							</li>
-							<li>
-								<a href="#">3</a>
-							</li>
-							<li>
-								<a href="#">4</a>
-							</li>
-							<li>
-								<a href="#">5</a>
-							</li>
-							<li>
-								<a href="#" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
+					<div id="Pagination7" class="pagination">
+					</div>
 				</div>
 			</div>
 		</div>

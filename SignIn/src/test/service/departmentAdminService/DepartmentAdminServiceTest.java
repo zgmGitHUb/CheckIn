@@ -72,4 +72,12 @@ public class DepartmentAdminServiceTest {
         tbEmployee.setEmployeeid("2");
         departmentAdminService.queryNotify(tbEmployee,true);
     }
+
+    @Test
+    public void testQueryActivites() throws Exception {
+        DepartmentAdminService departmentAdminService= (DepartmentAdminService) applicationContext.getBean("departmentAdminService");
+        TbEmployee tbEmployee=new TbEmployee();
+        tbEmployee.setEmployeeid("2");
+        departmentAdminService.queryActivites(tbEmployee);
+    }
 }

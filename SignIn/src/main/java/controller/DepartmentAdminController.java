@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pojo.TbApplication;
-import pojo.TbDepartmentschedule;
-import pojo.TbEmployee;
-import pojo.TbNotify;
+import pojo.*;
 import service.departmentAdminService.DepartmentAdminService;
 
 import java.util.List;
@@ -70,6 +67,16 @@ public class DepartmentAdminController {
             return null;
         List<TbNotify> notifies=departmentAdminService.queryNotify(tbEmployee,status);
         return notifies;
+    }
+
+    @RequestMapping("/queryActivites")
+    public @ResponseBody List<TbActivity> queryActivites(TbEmployee tbEmployee)
+    {
+        String employId=tbEmployee.getEmployeeid();
+        if(employId==null||employId=="")
+            return null;
+        List<TbActivity> activities=departmentAdminService.queryActivites(tbEmployee);
+        return activities;
     }
 
 }

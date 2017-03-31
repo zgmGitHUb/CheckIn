@@ -1,14 +1,12 @@
 package service.departmentAdminService;
 
 import mapper.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.*;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by user on 2017/3/25.
@@ -33,6 +31,9 @@ public class DepartmentAdminService {
 
     @Autowired
     private  TbActivityMapper activityMapper;
+
+    @Autowired
+    private MultiFormMapper multiFormMapper;
 
     public List<TbEmployee>  queryEmployee(TbEmployee tbEmployee)
     {
@@ -59,7 +60,6 @@ public class DepartmentAdminService {
             employIdList.add(tmp.getEmployeeid());
         }
         criteria.andEmployeeidIn(employIdList);
-        criteria.andStatusEqualTo(false);
         List<TbApplication> applications=tbApplicationMapper.selectByExample(applicationExample);
         return applications;
     }
@@ -105,32 +105,12 @@ public class DepartmentAdminService {
         List<TbEmployeenotify> employeenotifies=tbEmployeenotifyMapper.selectByExample(employeenotifyExample);
         return employeenotifies;
     }
-    public List<TbNotify> queryNotify(TbEmployee employee,boolean status)
+
+    public List<TbNotifyVo> queryNotifyVo(TbEmployee employee)
     {
-        List<TbEmployeenotify> employeenotifies=queryEmployeeNotify(employee,status);
-        List<String>notifyIds=new LinkedList<String>();
-        for(TbEmployeenotify tmp:employeenotifies)
-        {
-            //System.out.println(tmp)
-            notifyIds.add(tmp.getNotifyid());
-        }
-
-        TbNotifyExample notifyExample=new TbNotifyExample();
-        TbNotifyExample.Criteria criteria=notifyExample.createCriteria();
-        criteria.andNotifyidIn(notifyIds);
-        if(status==true)
-        {
-            Date d1=new Date();
-            Calendar now =Calendar.getInstance();
-            now.setTime(d1);
-            now.set(Calendar.DATE,now.get(Calendar.DATE)-7);
-            Date d2=now.getTime();
-            criteria.andNotifytimeBetween(d2,d1);
-        }
-        List<TbNotify> notifies=notifyMapper.selectByExample(notifyExample);
-        return notifies;
+        List<TbNotifyVo> tbNotifyVos=multiFormMapper.selectNotifyVoByEmployeeid(employee.getEmployeeid());
+        return tbNotifyVos;
     }
-
     public List<TbActivity> queryActivites(TbEmployee employee)
     {
         TbActivityExample activityExample=new TbActivityExample();

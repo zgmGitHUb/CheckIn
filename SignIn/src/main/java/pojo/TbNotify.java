@@ -5,6 +5,8 @@ import java.util.Date;
 public class TbNotify {
     private String notifyid;
 
+    private String title;
+
     private String content;
 
     private Date notifytime;
@@ -17,6 +19,14 @@ public class TbNotify {
 
     public void setNotifyid(String notifyid) {
         this.notifyid = notifyid == null ? null : notifyid.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
     public String getContent() {

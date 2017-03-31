@@ -3,6 +3,7 @@
 <mapper namespace="mapper.TbNotifyMapper">
   <resultMap id="BaseResultMap" type="pojo.TbNotify">
     <id column="NotifyId" jdbcType="CHAR" property="notifyid" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
     <result column="Content" jdbcType="VARCHAR" property="content" />
     <result column="NotifyTime" jdbcType="TIMESTAMP" property="notifytime" />
     <result column="Adscription" jdbcType="VARCHAR" property="adscription" />
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    NotifyId, Content, NotifyTime, Adscription
+    NotifyId, Title, Content, NotifyTime, Adscription
   </sql>
   <select id="selectByExample" parameterType="pojo.TbNotifyExample" resultMap="BaseResultMap">
     select
@@ -99,16 +100,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="pojo.TbNotify">
-    insert into tb_notify (NotifyId, Content, NotifyTime, 
-      Adscription)
-    values (#{notifyid,jdbcType=CHAR}, #{content,jdbcType=VARCHAR}, #{notifytime,jdbcType=TIMESTAMP}, 
-      #{adscription,jdbcType=VARCHAR})
+    insert into tb_notify (NotifyId, Title, Content, 
+      NotifyTime, Adscription)
+    values (#{notifyid,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{notifytime,jdbcType=TIMESTAMP}, #{adscription,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="pojo.TbNotify">
     insert into tb_notify
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="notifyid != null">
         NotifyId,
+      </if>
+      <if test="title != null">
+        Title,
       </if>
       <if test="content != null">
         Content,
@@ -123,6 +127,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="notifyid != null">
         #{notifyid,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
@@ -147,6 +154,9 @@
       <if test="record.notifyid != null">
         NotifyId = #{record.notifyid,jdbcType=CHAR},
       </if>
+      <if test="record.title != null">
+        Title = #{record.title,jdbcType=VARCHAR},
+      </if>
       <if test="record.content != null">
         Content = #{record.content,jdbcType=VARCHAR},
       </if>
@@ -164,6 +174,7 @@
   <update id="updateByExample" parameterType="map">
     update tb_notify
     set NotifyId = #{record.notifyid,jdbcType=CHAR},
+      Title = #{record.title,jdbcType=VARCHAR},
       Content = #{record.content,jdbcType=VARCHAR},
       NotifyTime = #{record.notifytime,jdbcType=TIMESTAMP},
       Adscription = #{record.adscription,jdbcType=VARCHAR}
@@ -174,6 +185,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="pojo.TbNotify">
     update tb_notify
     <set>
+      <if test="title != null">
+        Title = #{title,jdbcType=VARCHAR},
+      </if>
       <if test="content != null">
         Content = #{content,jdbcType=VARCHAR},
       </if>
@@ -188,7 +202,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="pojo.TbNotify">
     update tb_notify
-    set Content = #{content,jdbcType=VARCHAR},
+    set Title = #{title,jdbcType=VARCHAR},
+      Content = #{content,jdbcType=VARCHAR},
       NotifyTime = #{notifytime,jdbcType=TIMESTAMP},
       Adscription = #{adscription,jdbcType=VARCHAR}
     where NotifyId = #{notifyid,jdbcType=CHAR}

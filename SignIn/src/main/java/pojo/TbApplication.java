@@ -9,6 +9,8 @@ public class TbApplication {
 
     private String dailyattendanceid;
 
+    private String title;
+
     private String remark;
 
     private Date applicationtime;
@@ -37,6 +39,14 @@ public class TbApplication {
 
     public void setDailyattendanceid(String dailyattendanceid) {
         this.dailyattendanceid = dailyattendanceid == null ? null : dailyattendanceid.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
     public String getRemark() {

@@ -5,6 +5,7 @@
     <id column="ApplicationId" jdbcType="CHAR" property="applicationid" />
     <result column="EmployeeId" jdbcType="CHAR" property="employeeid" />
     <result column="DailyAttendanceId" jdbcType="CHAR" property="dailyattendanceid" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
     <result column="Remark" jdbcType="VARCHAR" property="remark" />
     <result column="ApplicationTime" jdbcType="TIMESTAMP" property="applicationtime" />
     <result column="Status" jdbcType="BIT" property="status" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ApplicationId, EmployeeId, DailyAttendanceId, Remark, ApplicationTime, Status
+    ApplicationId, EmployeeId, DailyAttendanceId, Title, Remark, ApplicationTime, Status
   </sql>
   <select id="selectByExample" parameterType="pojo.TbApplicationExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="pojo.TbApplication">
     insert into tb_application (ApplicationId, EmployeeId, DailyAttendanceId, 
-      Remark, ApplicationTime, Status
-      )
+      Title, Remark, ApplicationTime, 
+      Status)
     values (#{applicationid,jdbcType=CHAR}, #{employeeid,jdbcType=CHAR}, #{dailyattendanceid,jdbcType=CHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{applicationtime,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT}
-      )
+      #{title,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{applicationtime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="pojo.TbApplication">
     insert into tb_application
@@ -119,6 +120,9 @@
       </if>
       <if test="dailyattendanceid != null">
         DailyAttendanceId,
+      </if>
+      <if test="title != null">
+        Title,
       </if>
       <if test="remark != null">
         Remark,
@@ -139,6 +143,9 @@
       </if>
       <if test="dailyattendanceid != null">
         #{dailyattendanceid,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -169,6 +176,9 @@
       <if test="record.dailyattendanceid != null">
         DailyAttendanceId = #{record.dailyattendanceid,jdbcType=CHAR},
       </if>
+      <if test="record.title != null">
+        Title = #{record.title,jdbcType=VARCHAR},
+      </if>
       <if test="record.remark != null">
         Remark = #{record.remark,jdbcType=VARCHAR},
       </if>
@@ -188,6 +198,7 @@
     set ApplicationId = #{record.applicationid,jdbcType=CHAR},
       EmployeeId = #{record.employeeid,jdbcType=CHAR},
       DailyAttendanceId = #{record.dailyattendanceid,jdbcType=CHAR},
+      Title = #{record.title,jdbcType=VARCHAR},
       Remark = #{record.remark,jdbcType=VARCHAR},
       ApplicationTime = #{record.applicationtime,jdbcType=TIMESTAMP},
       Status = #{record.status,jdbcType=BIT}
@@ -203,6 +214,9 @@
       </if>
       <if test="dailyattendanceid != null">
         DailyAttendanceId = #{dailyattendanceid,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        Title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         Remark = #{remark,jdbcType=VARCHAR},
@@ -220,6 +234,7 @@
     update tb_application
     set EmployeeId = #{employeeid,jdbcType=CHAR},
       DailyAttendanceId = #{dailyattendanceid,jdbcType=CHAR},
+      Title = #{title,jdbcType=VARCHAR},
       Remark = #{remark,jdbcType=VARCHAR},
       ApplicationTime = #{applicationtime,jdbcType=TIMESTAMP},
       Status = #{status,jdbcType=BIT}

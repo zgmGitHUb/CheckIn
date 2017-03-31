@@ -60,12 +60,12 @@ public class DepartmentAdminController {
     }
 
     @RequestMapping("/queryNotifies")
-    public @ResponseBody List<TbNotify> queryNotifies(TbEmployee tbEmployee,boolean status)
+    public @ResponseBody List<TbNotifyVo> queryNotifies(TbEmployee tbEmployee,boolean status)
     {
         String employId=tbEmployee.getEmployeeid();
         if(employId==null||employId=="")
             return null;
-        List<TbNotify> notifies=departmentAdminService.queryNotify(tbEmployee,status);
+        List<TbNotifyVo> notifies=departmentAdminService.queryNotifyVo(tbEmployee);
         return notifies;
     }
 

@@ -1,7 +1,6 @@
 package pojo;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TbDepartmentscheduleExample {
@@ -255,52 +254,62 @@ public class TbDepartmentscheduleExample {
             return (Criteria) this;
         }
 
-        public Criteria andEntertimeEqualTo(Date value) {
+        public Criteria andEntertimeEqualTo(String value) {
             addCriterion("EnterTime =", value, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andEntertimeNotEqualTo(Date value) {
+        public Criteria andEntertimeNotEqualTo(String value) {
             addCriterion("EnterTime <>", value, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andEntertimeGreaterThan(Date value) {
+        public Criteria andEntertimeGreaterThan(String value) {
             addCriterion("EnterTime >", value, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andEntertimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andEntertimeGreaterThanOrEqualTo(String value) {
             addCriterion("EnterTime >=", value, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andEntertimeLessThan(Date value) {
+        public Criteria andEntertimeLessThan(String value) {
             addCriterion("EnterTime <", value, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andEntertimeLessThanOrEqualTo(Date value) {
+        public Criteria andEntertimeLessThanOrEqualTo(String value) {
             addCriterion("EnterTime <=", value, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andEntertimeIn(List<Date> values) {
+        public Criteria andEntertimeLike(String value) {
+            addCriterion("EnterTime like", value, "entertime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntertimeNotLike(String value) {
+            addCriterion("EnterTime not like", value, "entertime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntertimeIn(List<String> values) {
             addCriterion("EnterTime in", values, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andEntertimeNotIn(List<Date> values) {
+        public Criteria andEntertimeNotIn(List<String> values) {
             addCriterion("EnterTime not in", values, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andEntertimeBetween(Date value1, Date value2) {
+        public Criteria andEntertimeBetween(String value1, String value2) {
             addCriterion("EnterTime between", value1, value2, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andEntertimeNotBetween(Date value1, Date value2) {
+        public Criteria andEntertimeNotBetween(String value1, String value2) {
             addCriterion("EnterTime not between", value1, value2, "entertime");
             return (Criteria) this;
         }
@@ -315,52 +324,62 @@ public class TbDepartmentscheduleExample {
             return (Criteria) this;
         }
 
-        public Criteria andOuttimeEqualTo(Date value) {
+        public Criteria andOuttimeEqualTo(String value) {
             addCriterion("OutTime =", value, "outtime");
             return (Criteria) this;
         }
 
-        public Criteria andOuttimeNotEqualTo(Date value) {
+        public Criteria andOuttimeNotEqualTo(String value) {
             addCriterion("OutTime <>", value, "outtime");
             return (Criteria) this;
         }
 
-        public Criteria andOuttimeGreaterThan(Date value) {
+        public Criteria andOuttimeGreaterThan(String value) {
             addCriterion("OutTime >", value, "outtime");
             return (Criteria) this;
         }
 
-        public Criteria andOuttimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andOuttimeGreaterThanOrEqualTo(String value) {
             addCriterion("OutTime >=", value, "outtime");
             return (Criteria) this;
         }
 
-        public Criteria andOuttimeLessThan(Date value) {
+        public Criteria andOuttimeLessThan(String value) {
             addCriterion("OutTime <", value, "outtime");
             return (Criteria) this;
         }
 
-        public Criteria andOuttimeLessThanOrEqualTo(Date value) {
+        public Criteria andOuttimeLessThanOrEqualTo(String value) {
             addCriterion("OutTime <=", value, "outtime");
             return (Criteria) this;
         }
 
-        public Criteria andOuttimeIn(List<Date> values) {
+        public Criteria andOuttimeLike(String value) {
+            addCriterion("OutTime like", value, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeNotLike(String value) {
+            addCriterion("OutTime not like", value, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeIn(List<String> values) {
             addCriterion("OutTime in", values, "outtime");
             return (Criteria) this;
         }
 
-        public Criteria andOuttimeNotIn(List<Date> values) {
+        public Criteria andOuttimeNotIn(List<String> values) {
             addCriterion("OutTime not in", values, "outtime");
             return (Criteria) this;
         }
 
-        public Criteria andOuttimeBetween(Date value1, Date value2) {
+        public Criteria andOuttimeBetween(String value1, String value2) {
             addCriterion("OutTime between", value1, value2, "outtime");
             return (Criteria) this;
         }
 
-        public Criteria andOuttimeNotBetween(Date value1, Date value2) {
+        public Criteria andOuttimeNotBetween(String value1, String value2) {
             addCriterion("OutTime not between", value1, value2, "outtime");
             return (Criteria) this;
         }

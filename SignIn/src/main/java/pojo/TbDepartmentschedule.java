@@ -1,15 +1,13 @@
 package pojo;
 
-import java.util.Date;
-
 public class TbDepartmentschedule {
     private String scheduleid;
 
     private String departmentid;
 
-    private Date entertime;
+    private String entertime;
 
-    private Date outtime;
+    private String outtime;
 
     public String getScheduleid() {
         return scheduleid;
@@ -27,19 +25,19 @@ public class TbDepartmentschedule {
         this.departmentid = departmentid == null ? null : departmentid.trim();
     }
 
-    public Date getEntertime() {
+    public String getEntertime() {
         return entertime;
     }
 
-    public void setEntertime(Date entertime) {
-        this.entertime = entertime;
+    public void setEntertime(String entertime) {
+        this.entertime = entertime == null ? null : entertime.trim();
     }
 
-    public Date getOuttime() {
+    public String getOuttime() {
         return outtime;
     }
 
-    public void setOuttime(Date outtime) {
-        this.outtime = outtime;
+    public void setOuttime(String outtime) {
+        this.outtime = outtime == null ? null : outtime.trim();
     }
 }

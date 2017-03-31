@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pojo.TbApplication;
 import pojo.TbDepartmentschedule;
 import pojo.TbEmployee;
+import pojo.TbNotifyVo;
 
 import java.util.List;
 
@@ -65,13 +66,6 @@ public class DepartmentAdminServiceTest {
         departmentAdminService.queryEmployeeNotify(tbEmployee,false);
     }
 
-    @Test
-    public void testQueryNotify() throws Exception {
-        DepartmentAdminService departmentAdminService= (DepartmentAdminService) applicationContext.getBean("departmentAdminService");
-        TbEmployee tbEmployee=new TbEmployee();
-        tbEmployee.setEmployeeid("2");
-        departmentAdminService.queryNotify(tbEmployee,true);
-    }
 
     @Test
     public void testQueryActivites() throws Exception {
@@ -79,5 +73,16 @@ public class DepartmentAdminServiceTest {
         TbEmployee tbEmployee=new TbEmployee();
         tbEmployee.setEmployeeid("2");
         departmentAdminService.queryActivites(tbEmployee);
+    }
+
+
+
+    @Test
+    public void testQueryNotifyVo() throws Exception {
+        DepartmentAdminService departmentAdminService= (DepartmentAdminService) applicationContext.getBean("departmentAdminService");
+        TbEmployee tbEmployee=new TbEmployee();
+        tbEmployee.setEmployeeid("2");
+        List<TbNotifyVo> tbNotifyVos=departmentAdminService.queryNotifyVo(tbEmployee);
+        System.out.println(tbNotifyVos);
     }
 }

@@ -125,8 +125,8 @@
     //绑定邮箱
     function bindEmail(){
         var email=document.getElementById("Email");
-        alert("original email:"+originalEmail);
-        alert("test value:"+email.value);
+//        alert("original email:"+originalEmail);
+//        alert("test value:"+email.value);
         if(originalTel!=email.value && email.value!=null && email.value!=" ") {
             alert("test running bindEmail");
             $.ajax({
@@ -134,10 +134,10 @@
                 url: "AdminAccountManagement/sendEmailCode",
                 data: 'employeeid=' + cookie + '&email=' + email.value,
                 success: function (data) {
-                    alert("test success" + data["status"]);
+                    alert("test success：" + data["status"]);
                 },
                 error: function () {
-                    alert("test  false" + data["status"]);
+                    alert("test  false：" + data["status"]);
                     return;
                 }
             });

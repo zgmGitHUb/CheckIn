@@ -35,6 +35,7 @@ public class DepartmentAdminService {
     @Autowired
     private MultiFormMapper multiFormMapper;
 
+
     public List<TbEmployee>  queryEmployee(TbEmployee tbEmployee)
     {
         TbEmployeeExample employeeExample=new TbEmployeeExample();
@@ -124,5 +125,11 @@ public class DepartmentAdminService {
         criteria.andStarttimeBetween(d2,d1);
         List<TbActivity> activities=activityMapper.selectByExample(activityExample);
         return activities;
+    }
+
+    public void updateNotifyStatus(TbEmployeenotify employeenotify)
+    {
+        employeenotify.setStatus(true);
+        tbEmployeenotifyMapper.updateByPrimaryKey(employeenotify);
     }
 }

@@ -79,4 +79,14 @@ public class DepartmentAdminController {
         return activities;
     }
 
+    @RequestMapping("/updateNotifyStatus")
+    public @ResponseBody void updateNotifyStatus(TbEmployeenotify tbEmployeenotify)
+    {
+        String employId=tbEmployeenotify.getEmployeeid();
+        String notifyid=tbEmployeenotify.getNotifyid();
+        if(employId==null||employId==""||notifyid==null||notifyid=="")
+            return;
+        departmentAdminService.updateNotifyStatus(tbEmployeenotify);
+    }
+
 }

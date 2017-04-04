@@ -4,10 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import pojo.TbApplication;
-import pojo.TbDepartmentschedule;
-import pojo.TbEmployee;
-import pojo.TbNotifyVo;
+import pojo.*;
 
 import java.util.List;
 
@@ -84,5 +81,14 @@ public class DepartmentAdminServiceTest {
         tbEmployee.setEmployeeid("2");
         List<TbNotifyVo> tbNotifyVos=departmentAdminService.queryNotifyVo(tbEmployee);
         System.out.println(tbNotifyVos);
+    }
+
+    @Test
+    public void testUpdateNotifyStatus() throws Exception {
+        DepartmentAdminService departmentAdminService= (DepartmentAdminService) applicationContext.getBean("departmentAdminService");
+        TbEmployeenotify tbEmployeenotify=new TbEmployeenotify();
+        tbEmployeenotify.setNotifyid("1");
+        tbEmployeenotify.setEmployeeid("2");
+        departmentAdminService.updateNotifyStatus(tbEmployeenotify);
     }
 }

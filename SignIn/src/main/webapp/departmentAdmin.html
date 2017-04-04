@@ -18,6 +18,7 @@
 		var departmentId="";
 		var privilege="";
 		var employeeId="";
+		var notifyId="";
 		function getCookie() {
 			var strCookie = document.cookie;
 			var arrCookie = strCookie.split(";");
@@ -140,15 +141,15 @@
 										var s=i+1;
 										var num;
 										if(data[i].status==true)
-										   num=1;
+										   num=3;
 										else
-										   num=0;
+										   num=2;
 										$("#applications")
 												.append(
 												'<tr class="f'+num+'"><td><input type="checkbox" id="my_departmentAttendlist_checkbox_'+s+'"/></td><td>'
 												+ data[i].applicationid
-												+ '</td><td>'
-												+ data[i].remark
+												+ '</td><td >'
+												+ data[i].title
 												+ '</td><td>'
 												+ (new Date(data[i].applicationtime)).toLocaleString()
 												+ '</td></tr>');
@@ -193,9 +194,9 @@
 												'<tr><td><input type="checkbox" id="my_employeeslist_checkbox_'+s+'"/></td><td>'
 												+ data[i].scheduleid
 												+ '</td><td>'
-												+ (new Date(data[i].entertime)).getHours()
+												+ data[i].entertime
 												+ '</td><td>'
-												+ (new Date(data[i].outtime)).getHours()
+												+ data[i].outtime
 												+ '</td></tr>');
 
 									}
@@ -237,9 +238,9 @@
 												.append(
 												'<tr class="f'+data[i].status+'"><td><input type="checkbox"  id="my_prepare_notify_checkbox_'+s+'"/></td><td>'
 												+ data[i].notifyid
-												+ '</td><td>'
-												+ data[i].content
-												+ '</td><td>'
+												+ '</td><td onclick=show("'+data[i].title+'","'+data[i].content+'","'+data[i].notifyid+'","'+data[i].employeeid+'")><a>'
+												+ data[i].title
+												+ '</a></td><td>'
 												+ data[i].adscription
 												+ '</td><td>'
 												+ (new Date(data[i].notifytime)).toLocaleString()
@@ -284,7 +285,7 @@
 												.append(
 												'<tr><td><input type="checkbox" id="my_business_trip_checkbox_'+s+'"/></td><td>'
 												+ data[i].activityid
-												+ '</td><td onclick=show("'+data[i].activityname+'","'+data[i].content+'")><a>'
+												+ '</td><td onclick=show("'+data[i].activityname+'","'+data[i].content+'","'+data[i].activityid+'",0)><a>'
 												+ data[i].activityname
 												+ '</a></td><td>'
 												+ (new Date(data[i].starttime)).toLocaleString()
@@ -303,6 +304,21 @@
 							return;
 						}
 					});
+		}
+		function updateNotifyStatus(employeeId,notifyId)
+		{
+			$.ajax({
+				type : 'post',
+				url : "DepartmentAdmin/updateNotifyStatus",
+				data: 'employeeid='+employeeId+'&notifyid='+notifyId,
+				success : function(data) {
+					queryNotifies();
+				},
+				error : function() {
+					queryNotifies();
+				}
+
+			});
 		}
 	</script>
 
@@ -644,7 +660,7 @@
 							<!--调用全选js函数-->
 							<th><input type="checkbox" id="my_prepare_notify_checkbox_selectall" onclick="prepare_notify_select_all()"/></th>
 							<th>通知编号</th>
-							<th>通知内容</th>
+							<th>通知主题</th>
 							<th>通知来源</th>
 							<th>通知时间</th>
 						</tr>
@@ -721,7 +737,7 @@
 							<!--调用全选js函数-->
 							<th><input type="checkbox" id="my_departmentAttendlist_checkbox_selectall" onclick="departmentAttendlist_select_all()"/></th>
 							<th>Id</th>
-							<th>申请内容</th>
+							<th>标题</th>
 							<th>时间</th>
 						</tr>
 						</thead>
@@ -768,20 +784,6 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<ul class="my_headerbuttonlist">
-						<li>
-							<a href="#"><img src="img/add.png" alt="添加">&nbsp;<span>添加</span></a>
-						</li>
-						<li>
-							<a href="#"><img src="img/reverse.png" alt="修改">&nbsp;<span>修改</span></a>
-						</li>
-						<li>
-							<a href="#"><img src="img/remove.png" alt="删除">&nbsp;<span>删除</span></a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/inport_excel.png" alt="导入">&nbsp;<span>导入Excel</span>
-							</a>
-						</li>
 						<li>
 							<a href="#">
 								<img src="img/export_excel.png" alt="导出">&nbsp;<span>导出Excel</span>
@@ -833,18 +835,15 @@
 		</div>
 	</div>
 </div>
-<button class="btn btn-primary" type="button">点击我</button>
 <div class="modal" id="themodal"  tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">标题</h4>
-				<h4 class="modal-title" id="title">模态弹出窗标题</h4>
+				<h4 class="modal-title modalTitle" id="title">模态弹出窗标题</h4>
 			</div>
 			<div class="modal-body">
-				<p>内容</p>
-				<p id="content">内容</p>
+				<p id="content" class="modalContent">内容</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -1010,9 +1009,17 @@
 		$("#content").text(content);
 		$("#themodal").modal();
 	}
-	function show(title,content)
+	function show(title,content,id,style)
 	{
 		showContent(title,content);
+		if(style!=0)
+		{
+			employeeId=style;
+			notifyId=id;
+			Style=style;
+			updateNotifyStatus(employeeId,notifyId);
+			notifyId="";
+		}
 	}
 	$(function(){
 
@@ -1033,12 +1040,12 @@
 			$(".f0").show();
 		});
 		$("#f2").click(function(){
-			$(".f1").hide();
-			$(".f0").show();
+			$(".f3").hide();
+			$(".f2").show();
 		});
 		$("#f3").click(function(){
-			$(".f0").hide();
-			$(".f1").show();
+			$(".f2").hide();
+			$(".f3").show();
 		});
 	});
 </script>

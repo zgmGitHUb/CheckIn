@@ -68,7 +68,16 @@
 	text-align: right;
 	border-right: 5px solid #eee;
 }
-.f0
+.f0,
+.f2
 {
 	font-weight: bolder;
+}
+.modalTitle
+{
+	font-size:1.75em;
+}
+.modalContent
+{
+	font-size:1.125em;
 }

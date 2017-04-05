@@ -1,13 +1,17 @@
 package controller;
 
 import com.alibaba.fastjson.JSONArray;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import pojo.*;
 import service.departmentAdminService.DepartmentAdminService;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -89,4 +93,29 @@ public class DepartmentAdminController {
         departmentAdminService.updateNotifyStatus(tbEmployeenotify);
     }
 
+    @RequestMapping("/uploadExcel")
+    public void uploadExcel(MultipartFile file)
+    {
+        List<TbEmployee> employees=new LinkedList<TbEmployee>();
+        try {
+            Workbook wb= WorkbookFactory.create(file.getInputStream());
+            Sheet sheet=wb.getSheetAt(0);
+            int length=sheet.getLastRowNum();
+            System.out.println(length);
+            for(int i=2;i<=sheet.getLastRowNum();i++)
+            {
+                Row row=sheet.getRow(i);
+                TbEmployee employee=new TbEmployee();
+                row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+                employee.setAccount(row.getCell(0).getStringCellValue());
+                row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
+                employee.setPassword(row.getCell(1).getStringCellValue());
+                employees.add(employee);
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println(employees);
+    }
 }

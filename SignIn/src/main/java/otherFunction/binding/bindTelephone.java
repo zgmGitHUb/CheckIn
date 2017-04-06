@@ -79,9 +79,9 @@ public class bindTelephone {
     private static String Url = "http://106.ihuyi.cn/webservice/sms.php?method=Submit";
 
     @Autowired
-    private TbEmployeeMapper tbEmployeeMapper;
+//    private TbEmployeeMapper tbEmployeeMapper;
 
-    public static int sendMessage  (TbEmployee tbEmployee){
+    public static int sendMessage  (String Tel){
 
         HttpClient client = new HttpClient();
         PostMethod method = new PostMethod(Url);
@@ -89,15 +89,15 @@ public class bindTelephone {
         client.getParams().setContentCharset("GBK");
         method.setRequestHeader("ContentType","application/x-www-form-urlencoded;charset=GBK");
 
-        int randomNumber = (int)((Math.random()*9+1)*1000000);
+        int randomNumber = (int)((Math.random()*9+1)*100000);
 
-        String content = new String("您的验证码是：" + randomNumber + "。请不要把验证码泄露给其他人。--SignIn签到系统");
+        String content = new String("您的验证码是：" + randomNumber + "。请不要把验证码泄露给其他人。");
 
         NameValuePair[] data = {//提交短信
                 new NameValuePair("account", "C19786829"), //查看用户名请登录用户中心->验证码、通知短信->帐户及签名设置->APIID
                 new NameValuePair("password", "8310adee9ec43547fcb64912d3694081"),  //查看密码请登录用户中心->验证码、通知短信->帐户及签名设置->APIKEY
                 //new NameValuePair("password", util.StringUtil.MD5Encode("密码")),
-                new NameValuePair("mobile", tbEmployee.getTelephone()),
+                new NameValuePair("mobile", Tel),
                 new NameValuePair("content", content),
         };
         method.setRequestBody(data);

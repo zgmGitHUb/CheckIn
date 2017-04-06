@@ -60,7 +60,7 @@ public class bindEmail {
     }
 
     //发送邮箱验证码（链接）
-    public static String sendEmailCode(TbEmployee tbEmployee) throws UnknownHostException {
+    public static String sendEmailCode(String Id,String Email,String Url) throws UnknownHostException {
         //InetAddress.getLocalHost();应加throws UnknownHostException
         InetAddress address= InetAddress.getLocalHost();
 //        String Ip=address.getHostAddress();
@@ -69,14 +69,14 @@ public class bindEmail {
 
         String Ip="localhost";
 
-        String employeeId=tbEmployee.getEmployeeid();
-        String email=tbEmployee.getEmail();
+        String employeeId=Id;
+        String email=Email;
 
         String UUID1= UUID.randomUUID().toString();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");//设置日期格式
         String Time=df.format(new Date());
-        String linkAddress="http://"+Ip+":8080/SignIn/AdminAccountManagement/checkBingingEamilInformation?" +
-                "EmployeeId="+employeeId+"&Email="+email+"&UUID="+UUID1+"&CreateTime="+Time;
+        String linkAddress="http://"+Ip+":8080/SignIn/"+Url+"/checkBingingEamilInformation?" +
+                "Id="+employeeId+"&Email="+email+"&UUID="+UUID1+"&CreateTime="+Time;
         String emailContent = "【签到系统】"
                 +"点击下面的链接,验证邮箱<br/><a href="
                 + linkAddress + " target='_BLANK'>" + "邮箱验证"

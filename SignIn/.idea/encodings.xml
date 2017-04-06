@@ -11,7 +11,7 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/spring/applicationContext-transaction.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/spring/springmvc.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/compaterAdmin.html" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/companyAdmin.html" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/css" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/css/pagination.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/departmentAdmin.html" charset="GBK" />

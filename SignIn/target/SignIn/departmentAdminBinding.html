@@ -75,28 +75,28 @@
     }
 
     //发送验证码
-//    function sendMessage () {
-//        var tel = document.getElementById("Tel");
-//        alert("test value:" + tel.value);
-//        alert("original tel:"+originalTel);
-//        if (originalTel != tel.value && tel.value != null && tel.value != " ") {
-//            alert("test running bindTel");
-//            $.ajax({
-//                type: 'post',
-//                url: "AdminAccountManagement/sendMessage",
-//                data: 'employeeid=' + cookie + '&telephone=' + tel.value,
-//                success: function (data) {
-//                    alert("test success" + data["status"]);
-//                    if(data["status"])$('#myModal').modal('show');
-//                },
-//                error: function () {
-//                    alert("test  false" + data["status"]);
-//                    return;
-//                }
-//            });
-//        }
-//        alert("手机号码不能为空或与原手机号码相同");
-//    }
+    //    function sendMessage () {
+    //        var tel = document.getElementById("Tel");
+    //        alert("test value:" + tel.value);
+    //        alert("original tel:"+originalTel);
+    //        if (originalTel != tel.value && tel.value != null && tel.value != " ") {
+    //            alert("test running bindTel");
+    //            $.ajax({
+    //                type: 'post',
+    //                url: "AdminAccountManagement/sendMessage",
+    //                data: 'employeeid=' + cookie + '&telephone=' + tel.value,
+    //                success: function (data) {
+    //                    alert("test success" + data["status"]);
+    //                    if(data["status"])$('#myModal').modal('show');
+    //                },
+    //                error: function () {
+    //                    alert("test  false" + data["status"]);
+    //                    return;
+    //                }
+    //            });
+    //        }
+    //        alert("手机号码不能为空或与原手机号码相同");
+    //    }
 
     //绑定手机号码
     function bindTel(){
@@ -159,14 +159,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <!--logo-->
-        <!--<div>-->
-        <!--<img id="my_icon" src="img/签到100.png" alt="我们的图标" />-->
-        <!--</div>-->
+
+        <div>
+            <img id="my_icon" src="img/logo.png" alt="我们的图标" />
+        </div>
 
     </div>
 
-    <h1 id="my_title">管理员账号设置</h1>
+    <h1 id="my_title">签到网站后台管理</h1>
 
     <ul class="nav navbar-nav navbar-right" id="my_navbar-cancellation">
         <li>
@@ -192,12 +192,37 @@
                 </div>
             </li>
 
+            <!--此为公司负责人时才显示-->
+
+            <!--还未实现公司负责人不能修改员工列表的信息，只读-->
+
+            <!--<li>
+
+                    <a href="#sub6" data-toggle="collapse"><b>部门管理</b><span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                    <ul id="sub6" class="nav collapse">
+                        <li>
+                            <a href="#breadcrumb_departmentlist"><span class="glyphicon glyphicon-list"></span>&nbsp;部门列表</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="glyphicon glyphicon-align-left"></span>&nbsp;部门总体出勤情况</a>
+                        </li>
+
+                    </ul>
+
+            </li>-->
+
 
             <li>
-                <a href="#sub1" data-toggle="collapse"><b>部门管理</b><span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                <a href="#sub1" data-toggle="collapse"><b>员工管理</b><span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
                 <ul id="sub1" class="nav collapse">
                     <li>
-                        <a href="#breadcrumb_employeeslist"><span class="glyphicon glyphicon-list"></span>&nbsp;部门列表</a>
+                        <a href="#employeeTitle"><span class="glyphicon glyphicon-list"></span>&nbsp;员工列表</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-pencil"></span>&nbsp;出差登记/查询（暂无界面）</a>
+                    </li>
+                    <li>
+                        <a href="#departmentSchedulesTitle"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;上班时间表</a>
                     </li>
 
                 </ul>
@@ -209,30 +234,49 @@
                         <a href="#"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;发布通知信息（暂无界面）</a>
                     </li>
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;查看通知信息</a>
+                        <a href="#notifyTitle"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;查看通知信息</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="#sub3" data-toggle="collapse"><b>活动/会议</b><span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                <a href="#sub3" data-toggle="collapse"><b>修改审核</b><span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
                 <ul id="sub3" class="nav collapse">
+                    <li>
+                        <a href="#checkTitle"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;审核信息</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#sub4" data-toggle="collapse"><b>活动/会议</b><span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                <ul id="sub4" class="nav collapse">
                     <li>
                         <a href="#"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;发布活动/会议（暂无界面）</a>
                     </li>
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;查看活动/会议</a>
+                        <a href="#activities"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;查看活动/会议</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#sub5" data-toggle="collapse"><b>员工工作情况记录</b><span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                <ul id="sub5" class="nav collapse">
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;员工出勤情况记录表（暂无界面）</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-signal"></span>&nbsp;员工出勤情况曲线图（暂无界面）</a>
                     </li>
                 </ul>
             </li>
 
             <li>
-                <a href="#sub4" data-toggle="collapse"><b>账户设置</b><span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
-                <ul id="sub4" class="nav collapse">
+                <a href="#sub6" data-toggle="collapse"><b>账户设置</b><span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                <ul id="sub6" class="nav collapse">
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;密码修改</a>
+                        <a href="departmentAdminChangePassword.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;密码修改</a>
                     </li>
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-phone"></span>&nbsp;手机号/邮箱号绑定</a>
+                        <a href="departmentAdminBinding.html"><span class="glyphicon glyphicon-phone"></span>&nbsp;手机号/邮箱号绑定</a>
                     </li>
                 </ul>
             </li>
@@ -343,21 +387,21 @@
             var tel = document.getElementById("Tel");
             alert("test value:" + tel.value);
             alert("original tel:"+originalTel);
-                alert("test running bindTel");
-                $.ajax({
-                    type: 'post',
-                    url: "AdminAccountManagement/sendMessage",
-                    data: 'employeeid=' + cookie + '&telephone=' + tel.value,
-                    success: function (data) {
-                        alert("test success：" + data["status"]);
+            alert("test running bindTel");
+            $.ajax({
+                type: 'post',
+                url: "AdminAccountManagement/sendMessage",
+                data: 'employeeid=' + cookie + '&telephone=' + tel.value,
+                success: function (data) {
+                    alert("test success：" + data["status"]);
 
-                    },
-                    error: function () {
-                        alert("test  false：" + data["status"]);
-                        return;
-                    }
-                });
-                time(this);
+                },
+                error: function () {
+                    alert("test  false：" + data["status"]);
+                    return;
+                }
+            });
+            time(this);
         }
     }
 </script>

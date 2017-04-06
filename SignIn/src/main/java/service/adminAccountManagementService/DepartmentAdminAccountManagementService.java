@@ -12,7 +12,7 @@ import java.util.List;
  * Created by ZGM on 2017/3/30.
  */
 @Service
-public class AdminAccountManagementService {
+public class DepartmentAdminAccountManagementService {
     @Autowired
     private TbEmployeeMapper tbEmployeeMapper;
 

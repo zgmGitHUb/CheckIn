@@ -41,6 +41,7 @@ public class DepartmentAdminService {
         TbEmployeeExample employeeExample=new TbEmployeeExample();
         TbEmployeeExample.Criteria criteria=employeeExample.createCriteria();
         criteria.andDepartmentidEqualTo(tbEmployee.getDepartmentid());
+        criteria.andDelEqualTo(false);
         List<TbEmployee> employeeList=tbEmployeeMapper.selectByExample(employeeExample);
         for(TbEmployee tmp:employeeList)
         {
@@ -132,4 +133,43 @@ public class DepartmentAdminService {
         employeenotify.setStatus(true);
         tbEmployeenotifyMapper.updateByPrimaryKey(employeenotify);
     }
+
+    public boolean deleteEmployee(TbEmployeeVo tbEmployeeVo)
+    {
+        int length=tbEmployeeVo.getEmployeeids().size();
+        List<String>employeeids=tbEmployeeVo.getEmployeeids();
+        try
+        {
+        for(int i=0;i<length;i++)
+        {
+            TbEmployee tbEmployee=new TbEmployee();
+            tbEmployee.setEmployeeid(employeeids.get(i));
+            tbEmployee.setDel(true);
+            tbEmployeeMapper.updateByPrimaryKeySelective(tbEmployee);
+        }
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return  false;
+    }
+
+    public boolean deleteSchedule(TbDepartmentscheduleVo tbDepartmentscheduleVo)
+    {
+        int length=tbDepartmentscheduleVo.getScheduleids().size();
+        List<String> sheduleids=tbDepartmentscheduleVo.getScheduleids();
+        try {
+            for (int i = 0; i < length; i++) {
+                tbDepartmentscheduleMapper.deleteByPrimaryKey(sheduleids.get(i));
+            }
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

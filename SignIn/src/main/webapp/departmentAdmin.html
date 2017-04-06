@@ -93,7 +93,7 @@
 											sex="女";
 										$("#employee")
 												.append(
-												'<tr><td><input type="checkbox" id="my_departmentlist_checkbox_'+s+'"/></td><td>'
+												'<tr><td><input type="checkbox" class="'+data[i].employeeid+'" id="my_departmentlist_checkbox_'+s+'"/></td><td>'
 												+ data[i].name
 												+ '</td><td>'
 												+ data[i].duties
@@ -112,6 +112,31 @@
 						},
 						error : function() {
 							return;
+						}
+					});
+		}
+		function getAndDeleteEmployeeids()
+		{
+			var employids=new Array();
+			$("#employee input:checked").each(function(i,element)
+			{
+				employids[i]=$(element).attr("class");
+			});
+			deleteEmployeeids(employids);
+		}
+		function deleteEmployeeids(employeeids)
+		{
+			$
+					.ajax({
+						type : 'post',
+						url : "DepartmentAdmin/deleteEmployeeids",
+						data: 'employeeids='+employeeids,
+						success : function(data) {
+							alert("删除成功");
+							getEmployee();
+						},
+						error : function() {
+							alert("删除失败");
 						}
 					});
 		}
@@ -191,7 +216,7 @@
 										var s=i+1;
 										$("#departmentSchedules")
 												.append(
-												'<tr><td><input type="checkbox" id="my_employeeslist_checkbox_'+s+'"/></td><td>'
+												'<tr><td><input type="checkbox" class="'+data[i].scheduleid+'" id="my_employeeslist_checkbox_'+s+'"/></td><td>'
 												+ data[i].scheduleid
 												+ '</td><td>'
 												+ data[i].entertime
@@ -209,7 +234,31 @@
 						}
 					});
 		}
-
+		function getAndDeleteDepartmentSchedules()
+		{
+			var scheduleids=new Array();
+			$("#departmentSchedules input:checked").each(function(i,element)
+			{
+				scheduleids[i]=$(element).attr("class");
+			});
+			deleteDepartmentSchedules(scheduleids);
+		}
+		function deleteDepartmentSchedules(scheduleids)
+		{
+			$
+					.ajax({
+						type : 'post',
+						url : "DepartmentAdmin/deleteDepartmentSchedules",
+						data: 'scheduleids='+scheduleids,
+						success : function(data) {
+							alert("删除成功");
+							queryDepartmentSchedules();
+						},
+						error : function() {
+							alert("删除失败");
+						}
+					});
+		}
 		function queryNotifies() {
 
 			$
@@ -489,7 +538,7 @@
 							<a href="#"><img src="img/reverse.png" alt="修改">&nbsp;<span>修改</span></a>
 						</li>
 						<li>
-							<a href="#"><img src="img/remove.png" alt="删除">&nbsp;<span>删除</span></a>
+							<a onclick="getAndDeleteEmployeeids()"><img src="img/remove.png" alt="删除">&nbsp;<span>删除</span></a>
 						</li>
 						<li>
 							<a href="#">
@@ -563,7 +612,7 @@
 							<a href="#"><img src="img/reverse.png" alt="修改">&nbsp;<span>修改</span></a>
 						</li>
 						<li>
-							<a href="#"><img src="img/remove.png" alt="删除">&nbsp;<span>删除</span></a>
+							<a onclick="getAndDeleteDepartmentSchedules()"><img src="img/remove.png" alt="删除">&nbsp;<span>删除</span></a>
 						</li>
 						<li>
 							<a href="#">
@@ -866,7 +915,7 @@
 	//			公司负责人才显示
 	//			部门列表界面
 	function departmentlist_select_all(){
-		for(var i=1;i<=8;i++)
+		for(var i=1;i<=1000;i++)
 		{
 			var cbox_id="my_departmentlist_checkbox_"+i;
 			var cbox=document.getElementById(cbox_id);
@@ -874,14 +923,14 @@
 			if(document.getElementById("my_departmentlist_checkbox_selectall").checked)
 				cbox.checked=true;
 			else
-				cbox.checked=false;;
+				cbox.checked=false;
 		}
 	}
 
 	//			公司负责人才显示
 	//			部门总体出勤情况界面
 	function departmentAttendlist_select_all(){
-		for(var i=1;i<=8;i++)
+		for(var i=1;i<=1000;i++)
 		{
 			var cbox_id="my_departmentAttendlist_checkbox_"+i;
 			var cbox=document.getElementById(cbox_id);
@@ -895,7 +944,7 @@
 
 	//			员工列表界面
 	function employeeslist_select_all(){
-		for(var i=1;i<=8;i++)
+		for(var i=1;i<=1000;i++)
 		{
 			var cbox_id="my_employeeslist_checkbox_"+i;
 			var cbox=document.getElementById(cbox_id);
@@ -909,7 +958,7 @@
 
 	//			出差登记/查询界面
 	function business_trip_select_all(){
-		for(var i=1;i<=8;i++)
+		for(var i=1;i<=1000;i++)
 		{
 			var cbox_id="my_business_trip_checkbox_"+i;
 			var cbox=document.getElementById(cbox_id);
@@ -923,7 +972,7 @@
 
 	//			待通知信息界面
 	function prepare_notify_select_all(){
-		for(var i=1;i<=8;i++)
+		for(var i=1;i<=1000;i++)
 		{
 			var cbox_id="my_prepare_notify_checkbox_"+i;
 			var cbox=document.getElementById(cbox_id);
@@ -937,7 +986,7 @@
 
 	//			历史通知信息界面
 	function history_notify_select_all(){
-		for(var i=1;i<=8;i++)
+		for(var i=1;i<=1000;i++)
 		{
 			var cbox_id="my_history_notify_checkbox_"+i;
 			var cbox=document.getElementById(cbox_id);
@@ -951,7 +1000,7 @@
 
 	//			待审核信息界面
 	function prepare_review_select_all(){
-		for(var i=1;i<=8;i++)
+		for(var i=1;i<=1000;i++)
 		{
 			var cbox_id="my_prepare_review_checkbox_"+i;
 			var cbox=document.getElementById(cbox_id);
@@ -965,7 +1014,7 @@
 
 	//			历史审核信息界面
 	function history_review_select_all(){
-		for(var i=1;i<=8;i++)
+		for(var i=1;i<=1000;i++)
 		{
 			var cbox_id="my_history_review_checkbox_"+i;
 			var cbox=document.getElementById(cbox_id);
@@ -979,7 +1028,7 @@
 
 	//			员工出勤情况记录表界面
 	function attend_select_all(){
-		for(var i=1;i<=8;i++)
+		for(var i=1;i<=1000;i++)
 		{
 			var cbox_id="my_attend_checkbox_"+i;
 			var cbox=document.getElementById(cbox_id);

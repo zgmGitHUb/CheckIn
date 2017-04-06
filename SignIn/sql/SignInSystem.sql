@@ -140,7 +140,7 @@ create table tb_application /*修改申请表*/
 	foreign key(EmployeeId) references tb_employee(EmployeeId),#外键
 	DailyAttendanceId char(32) not null,#日常出勤记录id
 	foreign key(DailyAttendanceId) references tb_dailyAttendance(DailyAttendanceId),#外键
-	Title varchar(50) not null,#题目
+	Title varchar(50) not null,#申请标题
 	Remark varchar(100) not null,#备注
 	ApplicationTime timestamp not null,#申请时间
 	CorrectTime timestamp not null, #正确时间
@@ -219,7 +219,7 @@ use SignInSystem; /*打开数据库*/
 create table tb_notify /*通知表*/
 (
 	NotifyId char(32) primary key,#通知记录id
-	Title varchar(50) not null,#通知题目
+	Title varchar(50) not null,#通知标题
 	Content varchar(100) not null,#通知内容
 	NotifyTime timestamp not null,#发布通知时间
 	Adscription varchar(60) not null

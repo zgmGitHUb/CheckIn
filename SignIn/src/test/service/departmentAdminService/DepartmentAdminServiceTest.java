@@ -91,4 +91,22 @@ public class DepartmentAdminServiceTest {
         tbEmployeenotify.setEmployeeid("2");
         departmentAdminService.updateNotifyStatus(tbEmployeenotify);
     }
+
+    @Test
+    public void testDeleteEmployee() throws Exception {
+        DepartmentAdminService departmentAdminService= (DepartmentAdminService) applicationContext.getBean("departmentAdminService");
+        TbEmployeeVo tbEmployeeVo=new TbEmployeeVo();
+        tbEmployeeVo.getEmployeeids().add("1");
+        tbEmployeeVo.getEmployeeids().add("2");
+        departmentAdminService.deleteEmployee(tbEmployeeVo);
+    }
+
+    @Test
+    public void testDeleteSchedule() throws Exception {
+        DepartmentAdminService departmentAdminService= (DepartmentAdminService) applicationContext.getBean("departmentAdminService");
+        TbDepartmentscheduleVo tbDepartmentscheduleVo=new TbDepartmentscheduleVo();
+        tbDepartmentscheduleVo.getScheduleids().add("1");
+       tbDepartmentscheduleVo.getScheduleids().add("2");
+        departmentAdminService.deleteSchedule(tbDepartmentscheduleVo);
+    }
 }

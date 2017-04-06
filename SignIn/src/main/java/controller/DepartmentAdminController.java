@@ -118,4 +118,24 @@ public class DepartmentAdminController {
         }
         System.out.println(employees);
     }
+
+    @RequestMapping("deleteEmployeeids")
+    public  @ResponseBody String deleteEmployeeids(TbEmployeeVo tbEmployeeVo)
+    {
+        if(tbEmployeeVo==null||tbEmployeeVo.getEmployeeids()==null||tbEmployeeVo.getEmployeeids().size()==0)
+            return null;
+        if(departmentAdminService.deleteEmployee(tbEmployeeVo))
+            return "success";
+        return null;
+    }
+
+    @RequestMapping("deleteDepartmentSchedules")
+    public  @ResponseBody String deleteDepartmentSchedules(TbDepartmentscheduleVo tbDepartmentscheduleVo)
+    {
+        if(tbDepartmentscheduleVo==null||tbDepartmentscheduleVo.getScheduleids()==null||tbDepartmentscheduleVo.getScheduleids().size()==0)
+            return null;
+        if(departmentAdminService.deleteSchedule(tbDepartmentscheduleVo))
+        return "success";
+        return null;
+    }
 }
